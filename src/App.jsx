@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 export default function App() {
   const [story, setStory] = useState(""); //読み込んだ内容入ってる
   const [showStory, setShowStory] = useState(false); //ボタンを押したらバカ話を見せる
-  //最初の一回だけなのにuseStateにする意味あんのか？
-
-  const [makeStory, setMakeStory] = useState("false");
+  const [makeStory, setMakeStory] = useState("false"); //ボタンが押されたときにuseEffectを動かしたい
   
   const [name, setName] = useState("");
 
@@ -27,7 +25,7 @@ export default function App() {
   //目標、ボタンが押すたびにランダムな話がでてくる
   //下のhandleClicke関数内にぶち込むよりもなにかを第二引数にした方がいいんだろうな、なにを引数にすれば？？？
   //あたらしくそれ用の作らなきゃだめ・・・ってコト！？いったんそれでやってみるか
-  //makeStoryつくってみた、変数多くてキモ
+  //makeStoryつくってみた、変数多くね
 
 
   function handleClickResetButton() {
