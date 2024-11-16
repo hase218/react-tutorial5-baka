@@ -1,18 +1,27 @@
 import { useEffect, useState } from "react";
 
 export default function App() {
+  //useState、ユーザーの操作に応じてページの内容を書き換えるためにはコンポーネントの 状態 を変更します。
   const [story, setStory] = useState(""); //読み込んだ内容入ってる
   const [showStory, setShowStory] = useState(false); //ボタンを押したらバカ話を見せる
-  const [makeStory, setMakeStory] = useState("false"); //ボタンが押されたときにuseEffectを動かしたい
-  
-  const [name, setName] = useState("");
+  //実質最初の一回しか動かないけど、定義に基づいたらuseState使った方がいいはず
 
+  const [makeStory, setMakeStory] = useState("false"); //ボタンが押されたときにuseEffectを動かしたい
+
+  const [name, setName] = useState("");
   const [ukus, setUkUs] = useState("us");
-  const [units, setUnits] = useState(["94 fahrenheit", "300pounds"]);
 
   useEffect(() => {
     (async () => {
-      const response = await fetch("/.netlify/functions/bakaBanashi");
+      const payload = {name: "AAAAA", ukus: "us"};
+
+      const response = await fetch("/.netlify/functions/bakaBanashi", {
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
       const data = await response.json();
       console.log(data);
       console.log(makeStory);
@@ -25,7 +34,6 @@ export default function App() {
   //目標、ボタンが押すたびにランダムな話がでてくる
   //下のhandleClicke関数内にぶち込むよりもなにかを第二引数にした方がいいんだろうな、なにを引数にすれば？？？
   //あたらしくそれ用の作らなきゃだめ・・・ってコト！？いったんそれでやってみるか
-  //makeStoryつくってみた、変数多くね
 
 
   function handleClickResetButton() {
