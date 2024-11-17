@@ -13,13 +13,13 @@ export default async (req) => {
     const zItem = randomValueFromArray(z);
 
     const input = await req.json();
-    const name = input.name;
-    const ukus = input.ukus;
+    const name = input.nameData;
+    const ukus = input.ukusData;
 
     const story = 
         `It was ${ukus === "us" ? "94 fahrenheit" : "34 celsius"} outside, so ${xItem} went for a walk.\
         When theygot to ${yItem}, they stared in horror for a few moments, then ${zItem}.\
-        ${name} saw the whole thing, \
+        ${name === "" ? "Bob" : name} saw the whole thing, \
         but was not surprised — ${xItem} weighs ${ukus === "us" ? "300 pounds" : "21 stone"} and it was a hot day.`;
     
     return new Response(JSON.stringify(story));

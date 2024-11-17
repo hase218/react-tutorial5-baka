@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function App() {
   //useState、ユーザーの操作に応じてページの内容を書き換えるためにはコンポーネントの 状態 を変更します。
-  const [story, setStory] = useState(""); //読み込んだ内容入ってる
+  const [story, setStory] = useState(""); //読み込んだバカ話をいれる
   const [showStory, setShowStory] = useState(false); //ボタンを押したらバカ話を見せる
   //実質最初の一回しか動かないけど、定義に基づいたらuseState使った方がいいはず
 
@@ -13,19 +13,23 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      const payload = {name: "AAAAA", ukus: "us"};
-
-      const response = await fetch("/.netlify/functions/bakaBanashi", {
+      const payload = {nameData: name, ukusData: ukus};
+      try {
+        const response = await fetch("/.netlify/functions/bakaBanashi", {
         method: "POST",
         headers: {
           "Content-Type" : "application/json",
         },
         body: JSON.stringify(payload),
-      });
-      const data = await response.json();
-      console.log(data);
-      console.log(makeStory);
-      setStory(data);
+        });
+        const data = await response.json();
+        //console.log(data);
+        console.log(makeStory);
+        console.log(name, ukus);
+        setStory(data);
+      } catch(error) {
+        console.error(error.message);
+      }
     })();
   }, [makeStory]);
 
